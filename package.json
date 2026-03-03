@@ -1,0 +1,22 @@
+{
+  "name": "vefforritun-2-lokaverkefni",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "sass": "sass public/scss/main.scss public/css/styles.css --watch"
+  },
+  "keywords": [],
+  "author": "Hringur Hrafnkelsson",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "sass": "^1.97.3",
+    "dotenv": "^17.3.1",
+    "pg": "^8.18.0"
+  }
+}
