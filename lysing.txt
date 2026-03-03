@@ -1,0 +1,4 @@
+Vefur sem geymir safn af uppskriftum fyrir bakstur. Hægt væri að sjá yfirsýn (grid) með stuttri lýsingu af uppskriftunum t.d. tími, vinna, mynd, nafn. 
+Hægt væri síðan að sjá nánari upplýsingar sem inniheldur öll skref, fleiri myndir, tékklisti fyrir hráefni o.s.frv. með því að ýta á uppskrift eða leita eftir henni.
+
+Gögn sem væru geymd eru upplýsingar um uppskriftirnar (nafn, tími, hráefni, lýsing).
