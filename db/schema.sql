@@ -27,3 +27,12 @@ CREATE TABLE recipe_ingredients (
         REFERENCES ingredients(id)
         ON DELETE CASCADE
 )
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) UNIQUE CHECK (email LIKE "%_@_%._%"),
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP,
+    last_login TIMESTAMP
+)
