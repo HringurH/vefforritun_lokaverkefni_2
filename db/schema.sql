@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS recipes (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255)
     work_level INT CHECK (work_level >= 1 AND work_level <= 5),
-    time_seconds INT NOT NULL,
+    time_minutes INT NOT NULL,
     description TEXT NOT NULL,
     image_path VARCHAR(255)
 )
