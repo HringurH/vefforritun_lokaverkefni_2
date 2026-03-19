@@ -13,10 +13,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "dotenv": "^17.3.1",
     "ejs": "^3.1.10",
     "express": "^5.2.1",
-    "sass": "^1.97.3",
-    "dotenv": "^17.3.1",
-    "pg": "^8.18.0"
+    "pg": "^8.20.0",
+    "sass": "^1.97.3"
   }
 }

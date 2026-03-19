@@ -1,17 +1,18 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
+const recipeRoutes = require('./src/routes/recipeRoutes');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'src', 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-    res.render('index', { title: 'Recipes' });
-});
+app.use('/', recipeRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

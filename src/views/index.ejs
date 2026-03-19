@@ -1,7 +1,16 @@
 <%- include('partials/header') %>
 
     <main>
-        <h2>Placeholder</h2>
+        <div class="card-grid">
+            <% recipes.forEach(recipe => { %>
+            <div class="card">
+                <img src="<%= recipe.image_path %>" alt="<%= recipe.name %>" class="card-image">
+                <h2><%= recipe.name %></h2>
+                <p><%= recipe.description %></p>
+                <a href="/recipes/<%= recipe.name %>">View recipe</a>
+            </div>
+        <% }) %>
+        </div>
     </main>
 
 <%- include('partials/footer') %>

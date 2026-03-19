@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS recipes (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(255),
     work_level INT CHECK (work_level >= 1 AND work_level <= 5),
     time_minutes INT NOT NULL,
     description TEXT NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS ingredients (
     name VARCHAR(255)
 )
 
-CREATE TABLE recipe_ingredients (
+CREATE TABLE IF NOT EXISTS recipe_ingredients (
     recipe_id INT,
     ingredient_id INT,
     quantity INT,
@@ -28,11 +28,12 @@ CREATE TABLE recipe_ingredients (
         ON DELETE CASCADE
 )
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
-    email VARCHAR(255) UNIQUE CHECK (email LIKE "%_@_%._%"),
+    email VARCHAR(255) UNIQUE CHECK (email LIKE '%_@%_.%_'),
     password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP,
-    last_login TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_admin BOOLEAN DEFAULT false
 )
