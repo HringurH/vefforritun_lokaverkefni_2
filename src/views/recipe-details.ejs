@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+    <main>
+        <div class="card">
+            <img src="<%= recipe.image_path %>" alt="<%= recipe.name %>" class="card-image">
+            <h2><%= recipe.name %></h2>
+            <p><%= recipe.description %></p>
+            <p>Work level: <%= recipe.work_level %></p>
+            <p><%= recipe.time_minutes %> min.</p>
+            <a href="/">Go Back</a>
+        </div>
+    </main>
+
+<%- include('partials/footer') %>

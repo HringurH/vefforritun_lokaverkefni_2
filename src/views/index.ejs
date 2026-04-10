@@ -7,7 +7,7 @@
                 <img src="<%= recipe.image_path %>" alt="<%= recipe.name %>" class="card-image">
                 <h2><%= recipe.name %></h2>
                 <p><%= recipe.description %></p>
-                <a href="/recipes/<%= recipe.name %>">View recipe</a>
+                <a href="/recipe/<%= recipe.id %>">View recipe</a>
             </div>
         <% }) %>
         </div>
