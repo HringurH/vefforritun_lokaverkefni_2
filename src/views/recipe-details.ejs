@@ -1,14 +1,18 @@
 <%- include('partials/header') %>
 
     <main>
-        <div class="card">
+        <article>
             <img src="<%= recipe.image_path %>" alt="<%= recipe.name %>" class="card-image">
             <h2><%= recipe.name %></h2>
             <p><%= recipe.description %></p>
             <p>Work level: <%= recipe.work_level %></p>
             <p><%= recipe.time_minutes %> min.</p>
             <a href="/">Go Back</a>
-        </div>
+            <% ingredients.forEach(ingredient => { %>
+                <input type="checkbox" id="<%= ingredient.name %>">
+                <label for="<%= ingredient.name %>"><%= ingredient.name %> (<%= ingredient.quantity %>)</label><br>
+            <% }); %>
+        </article>
     </main>
 
 <%- include('partials/footer') %>

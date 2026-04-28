@@ -37,3 +37,17 @@ CREATE TABLE IF NOT EXISTS users (
     last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_admin BOOLEAN DEFAULT false
 )
+
+CREATE TABLE IF NOT EXISTS recipe_steps (
+    id SERIAL PRIMARY KEY,
+    step_number INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_path VARCHAR(255),
+    recipe_id INT NOT NULL,
+
+    CONSTRAINT fk_rs_recipe
+        FOREIGN KEY (recipe_id)
+        REFERENCES recipes(id)
+        ON DELETE CASCADE
+)
