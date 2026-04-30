@@ -19,7 +19,7 @@ const getRecipeDetails = async (req, res) => {
         const id = req.params.id;
         const recipe = await recipeService.getRecipeById(id);
         const ingredients = await recipeService.getIngredientsByRecipeId(id);
-        //const steps = await recipeService.getStepsByRecipeId(id);
+        const steps = await recipeService.getStepsByRecipeId(id);
 
         if (!recipe) {
             return res.status(404).render(('404', {title: 'Recipe Not Found (404)'}))
@@ -27,7 +27,9 @@ const getRecipeDetails = async (req, res) => {
 
         res.render('recipe-details', {
             title: recipe.name,
-            recipe: recipe
+            recipe: recipe,
+            ingredients: ingredients,
+            steps: steps
         });
     } catch (error) {
         console.error('Error fetching recipe', error);

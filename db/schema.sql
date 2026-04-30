@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS ingredients (
 CREATE TABLE IF NOT EXISTS recipe_ingredients (
     recipe_id INT,
     ingredient_id INT,
-    quantity INT,
+    quantity VARCHAR(255),
 
     PRIMARY KEY(recipe_id, ingredient_id),
     CONSTRAINT fk_ri_recipe

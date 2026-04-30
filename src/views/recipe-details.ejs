@@ -8,10 +8,21 @@
             <p>Work level: <%= recipe.work_level %></p>
             <p><%= recipe.time_minutes %> min.</p>
             <a href="/">Go Back</a>
-            <% ingredients.forEach(ingredient => { %>
-                <input type="checkbox" id="<%= ingredient.name %>">
-                <label for="<%= ingredient.name %>"><%= ingredient.name %> (<%= ingredient.quantity %>)</label><br>
-            <% }); %>
+            <div class="ingredients-list">
+                <h3>Ingredients:</h3>
+                <% ingredients.forEach(ingredient => { %>
+                    <input type="checkbox" id="<%= ingredient.name %>">
+                    <label for="<%= ingredient.name %>"><%= ingredient.name %> (<%= ingredient.quantity %>)</label><br>
+                <% }); %>
+            </div>
+            <div class="steps-list">
+                <h3>Steps:</h3>
+                <% steps.forEach(step => { %>
+                    <p><%= step.step_number %>. <%= step.name %></p>
+                    <p><%= step.description %></p>
+                    <img src="<%= step.image_path %>" alt="<%= step.name %>">
+                <% }); %>
+            </div>
         </article>
     </main>
 
