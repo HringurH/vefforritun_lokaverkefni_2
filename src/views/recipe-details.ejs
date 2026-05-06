@@ -1,13 +1,15 @@
 <%- include('partials/header') %>
 
     <main>
-        <article>
-            <img src="<%= recipe.image_path %>" alt="<%= recipe.name %>" class="card-image">
-            <h2><%= recipe.name %></h2>
-            <p><%= recipe.description %></p>
-            <p>Work level: <%= recipe.work_level %></p>
-            <p><%= recipe.time_minutes %> min.</p>
-            <a href="/">Go Back</a>
+        <article class="details">
+            <img src="../<%= recipe.image_path %>" alt="<%= recipe.name %>" class="recipe-img">
+            <div class="recipe-info">
+                <h2><%= recipe.name %></h2>
+                <p><%= recipe.description %></p>
+                <p>Work level: <%= recipe.work_level %></p>
+                <p><%= recipe.time_minutes %> min.</p>
+                <a href="/">Go Back</a>
+            </div>
             <div class="ingredients-list">
                 <h3>Ingredients:</h3>
                 <% ingredients.forEach(ingredient => { %>
@@ -20,7 +22,7 @@
                 <% steps.forEach(step => { %>
                     <p><%= step.step_number %>. <%= step.name %></p>
                     <p><%= step.description %></p>
-                    <img src="<%= step.image_path %>" alt="<%= step.name %>">
+                    <img src="../<%= step.image_path %>" alt="<%= step.name %>">
                 <% }); %>
             </div>
         </article>

@@ -35,9 +35,32 @@ const getStepsByRecipeId = async (id) => {
     return result.rows;
 };
 
+const createRecipe = async (name, description, time_minutes, work_level, image_path) => {
+    const sql = 'INSERT INTO recipes (name, description, time_minutes, work_level, image_path) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+    const values = [name, description, time_minutes, work_level, image_path];
+    const result = await db.query(sql, values);
+
+    return result.rows[0];
+};
+
+const createRecipeIngredient = async (recipeId, ingredientId, quantity) => {
+    const sql = 'INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES ($1, $2, $3)';
+    const values = [recipeId, ingredientId, quantity];
+    await db.query(sql, values);
+};
+
+const createRecipeStep = async (recipeId, stepNumber, instruction) => {
+    const sql = 'INSERT INTO recipe_steps (recipe_id, step_number, instruction) VALUES ($1, $2, $3)';
+    const values = [recipeId, stepNumber, instruction];
+    await db.query(sql, values);
+};
+
 module.exports = {
     getAllRecipes,
     getRecipeById,
     getIngredientsByRecipeId,
-    getStepsByRecipeId
+    getStepsByRecipeId,
+    createRecipe,
+    createRecipeIngredient,
+    createRecipeStep
 };

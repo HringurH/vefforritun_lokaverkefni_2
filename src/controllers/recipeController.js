@@ -37,7 +37,37 @@ const getRecipeDetails = async (req, res) => {
     }
 }
 
-module.exports = {
+const getRecipeForm = (req, res) => {
+    res.render('add-recipe', {
+        title: 'Add New Recipe'
+    });
+}
+
+const createRecipe = async (req, res) => {
+    try {
+        const { name, description, time_minutes, work_level, image_path, ingredients, steps } = req.body;
+        const recipe = await recipeService.createRecipe(name, description, time_minutes, work_level, image_path);
+        const recipeId = recipe.id;
+
+        for (const ingredient of ingredients) {
+            await recipeService.createRecipeIngredient(recipeId, ingredient.id, ingredient.quantity);
+        }
+
+        for (const step of steps) {
+            await recipeService.createRecipeStep(recipeId, step.step_number, step.instruction);
+        }
+
+        res.redirect(`/recipes/${recipeId}`);
+    } catch (error) {
+        console.error('Error creating recipe', error);
+        res.status(500).render('500', {title: 'Internal Server Error (500)'});
+    }
+};
+
+
+    module.exports = {
     getHomePage,
-    getRecipeDetails
+    getRecipeDetails,
+    getRecipeForm,
+    createRecipe
 };

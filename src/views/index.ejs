@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
     <main>
-        <div class="card-grid">
+        <div class="grid">
             <% recipes.forEach(recipe => { %>
             <div class="card">
                 <img src="<%= recipe.image_path %>" alt="<%= recipe.name %>" class="card-image">
@@ -10,6 +10,9 @@
                 <a href="/recipe/<%= recipe.id %>">View recipe</a>
             </div>
             <% }) %>
+            <div class="card add-recipe">
+                <a href="/recipe/new">Add New Recipe</a>
+            </div>
         </div>
     </main>
 
