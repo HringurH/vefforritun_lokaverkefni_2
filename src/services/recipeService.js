@@ -26,7 +26,7 @@ const getIngredientsByRecipeId = async (id) => {
 };
 
 const getStepsByRecipeId = async (id) => {
-    const result = await db.query('SELECT * FROM recipe_steps WHERE recipe_id = $1', [id]);
+    const result = await db.query('SELECT * FROM recipe_steps WHERE recipe_id = $1 ORDER BY step_number', [id]);
 
     if (result.rows.length === 0) {
         return null;
@@ -55,6 +55,45 @@ const createRecipeStep = async (recipeId, stepNumber, instruction) => {
     await db.query(sql, values);
 };
 
+getIngredientIdbyName = async (name) => {
+    const result = await db.query('SELECT id FROM ingredients WHERE name = $1', [name]);
+    if (result.rows.length === 0) {
+        return null;
+    }
+    return result.rows[0].id;
+}
+
+const addIngredientToRecipe = async (recipeId, name, quantity) => {
+    const ingredientId = await getIngredientIdbyName(name);
+
+    if (!ingredientId) {
+        const insertResult = await db.query('INSERT INTO ingredients (name) VALUES ($1) RETURNING id', [name]);
+        const newIngredientId = insertResult.rows[0].id;
+        await createRecipeIngredient(recipeId, newIngredientId, quantity);
+    } else {
+        await createRecipeIngredient(recipeId, ingredientId, quantity);
+    }
+};
+
+const addStepToRecipe = async (recipeId, { name, step_number, description }) => {
+    await db.query('INSERT INTO recipe_steps (recipe_id, step_number, name, description) VALUES ($1, $2, $3, $4)', [recipeId, step_number, name, description]);
+};
+
+const getRecipeIdByName = async (name) => {
+    const result = await db.query('SELECT id FROM recipes WHERE name = $1', [name]);
+    if (result.rows.length === 0) {
+        return null;
+    }
+    return result.rows[0].id;
+};
+
+const deleteRecipeByName = async (name) => {
+    const recipeId = await getRecipeIdByName(name);
+    if (recipeId) {
+        await db.query('DELETE FROM recipes WHERE id = $1', [recipeId]);
+    }
+};
+
 module.exports = {
     getAllRecipes,
     getRecipeById,
@@ -62,5 +101,9 @@ module.exports = {
     getStepsByRecipeId,
     createRecipe,
     createRecipeIngredient,
-    createRecipeStep
+    createRecipeStep,
+    addIngredientToRecipe,
+    addStepToRecipe,
+    getRecipeIdByName,
+    deleteRecipeByName
 };

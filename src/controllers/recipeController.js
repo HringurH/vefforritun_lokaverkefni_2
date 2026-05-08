@@ -43,23 +43,83 @@ const getRecipeForm = (req, res) => {
     });
 }
 
+const getRecipeIngredientForm = (req, res) => {
+    res.render('add-ingredient', {
+        title: 'Add New Ingredient'
+    });
+}
+
+const getRecipeStepForm = (req, res) => {
+    res.render('add-step', {
+        title: 'Add New Step'
+    });
+}
+
 const createRecipe = async (req, res) => {
     try {
         const { name, description, time_minutes, work_level, image_path} = req.body;
         const recipe = await recipeService.createRecipe(name, description, time_minutes, work_level, image_path);
         const recipeId = recipe.id;
 
-        res.redirect(`/recipes/${recipeId}`);
+        res.redirect(`/recipe/${recipeId}`);
     } catch (error) {
         console.error('Error creating recipe', error);
         res.status(500).render('500', {title: 'Internal Server Error (500)'});
     }
 };
 
+const addIngredient = async (req, res) => {
+    try {
+        const recipeId = req.params.id;
+        const { name, quantity } = req.body;
 
-    module.exports = {
+        await recipeService.addIngredientToRecipe(recipeId, name, quantity);
+
+        res.redirect(`/recipe/${recipeId}`);
+    } catch (error) {
+        console.error('Error adding ingredient:', error);
+        res.status(500).render('500', { title: 'Internal Server Error (500)' });
+    }
+};
+
+const addStep = async (req, res) => {
+    try {
+        const recipeId = req.params.id;
+        const { name, step_number, description } = req.body;
+
+        await recipeService.addStepToRecipe(recipeId, { name, step_number, description });
+
+        res.redirect(`/recipe/${recipeId}`);
+    } catch (error) {
+        console.error('Error adding step:', error);
+        res.status(500).render('500', { title: 'Internal Server Error (500)' });
+    }
+};
+
+const getRemoveRecipeForm = (req, res) => {
+    res.render('remove-recipe', {
+        title: 'Remove Recipe'
+    });
+}
+
+const removeRecipeByName = async (req, res) => {
+    try {
+        const { name } = req.body;
+        await recipeService.deleteRecipeByName(name);
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error removing recipe:', error);
+        res.status(500).render('500', { title: 'Internal Server Error (500)' });
+    }
+};
+
+module.exports = {
     getHomePage,
     getRecipeDetails,
     getRecipeForm,
-    createRecipe
+    createRecipe,
+    addIngredient,
+    addStep,
+    getRemoveRecipeForm,
+    removeRecipeByName
 };

@@ -16,6 +16,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', recipeRoutes);
 
+app.use((req, res, next) => {
+    res.status(404).render('404', { title: 'Page Not Found' });
+});
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).render('500', { title: 'Server Error' });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
     console.log('Press CTRL+C to stop the server');

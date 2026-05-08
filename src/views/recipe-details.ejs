@@ -2,7 +2,9 @@
 
     <main>
         <article class="details">
-            <img src="../<%= recipe.image_path %>" alt="<%= recipe.name %>" class="recipe-img">
+            <% if (recipe.image_path) { %>
+                <img src="../<%= recipe.image_path %>" alt="<%= recipe.name %>" class="recipe-img">
+            <% } %>
             <div class="recipe-info">
                 <h2><%= recipe.name %></h2>
                 <p><%= recipe.description %></p>
@@ -12,7 +14,7 @@
             </div>
             <div class="ingredients-list">
                 <h3>Ingredients:</h3>
-                <% if (ingredients != null) {%>
+                <% if (ingredients) {%>
                     <% ingredients.forEach(ingredient => { %>
                         <input type="checkbox" id="<%= ingredient.name %>">
                         <label for="<%= ingredient.name %>"><%= ingredient.name %> (<%= ingredient.quantity %>)</label><br>
@@ -23,15 +25,43 @@
             </div>
             <div class="steps-list">
                 <h3>Steps:</h3>
-                <% if (steps != null) { %>
+                <% if (steps) { %>
                     <% steps.forEach(step => { %>
                         <p><%= step.step_number %>. <%= step.name %></p>
                         <p><%= step.description %></p>
-                        <img src="../<%= step.image_path %>" alt="<%= step.name %>">
+                        <% if (step.image_path) { %>
+                            <img src="../<%= step.image_path %>" alt="<%= step.name %>">
+                        <% } %>
                     <% }); %>
                 <% } else { %>
                     <p>No steps added.</p>
                 <% } %>
+            </div>
+            <div class="add-ingredient form-container">
+                <h3>Add Ingredient:</h3>
+                <form action="/recipe/<%= recipe.id %>/ingredient" method="POST">
+                    <label for="ingredient-name">Name:</label>
+                    <input type="text" id="ingredient-name" name="name" required>
+
+                    <label for="ingredient-quantity">Quantity:</label>
+                    <input type="text" id="ingredient-quantity" name="quantity" required>
+
+                    <button type="submit">Add Ingredient</button>
+                </form>
+            </div>
+
+            <div class="add-step form-container">
+                <h3>Add Step:</h3>
+                <form action="/recipe/<%= recipe.id %>/step" method="POST">
+                    <label for="step-name">Step Name:</label>
+                    <input type="text" id="step-name" name="name" required>
+                    <label for="step-number">Step Number:</label>
+                    <input type="number" id="step-number" name="step_number" required>
+                    <label for="step-description">Step Description:</label>
+                    <textarea id="step-description" name="description" required></textarea>
+
+                    <button type="submit">Add Step</button>
+                </form>
             </div>
         </article>
     </main>

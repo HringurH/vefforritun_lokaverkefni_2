@@ -4,7 +4,9 @@
         <div class="grid">
             <% recipes.forEach(recipe => { %>
             <div class="card">
-                <img src="<%= recipe.image_path %>" alt="<%= recipe.name %>" class="card-image">
+                <% if (recipe.image_path) { %>
+                    <img src="<%= recipe.image_path %>" alt="<%= recipe.name %>" class="card-image">
+                <% } %>
                 <h2><%= recipe.name %></h2>
                 <p><%= recipe.description %></p>
                 <a href="/recipe/<%= recipe.id %>">View recipe</a>
