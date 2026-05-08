@@ -1,0 +1,36 @@
+@use "../variables" as *;
+
+.card {
+    background-color: darken($background-color, 3%);
+    border: 1px solid darken($primary-color, 10%);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin: 16px 5px;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        font-size: 1.5em;
+        color: $text-color;
+        margin-bottom: 4px;
+    }
+
+    p {
+        font-size: 1em;
+        color: darken($text-color, 20%);
+    }
+
+    a {
+        color: $accent-color;
+        text-decoration: none;
+
+        &:hover {
+            color: darken($accent-color, 15%);
+            text-decoration: underline;
+        }
+    }
+}

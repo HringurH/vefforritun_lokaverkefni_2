@@ -1,0 +1,12 @@
+@use '../variables' as *;
+
+footer {
+    background-color: $primary-color;
+    color: $text-color;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 1px solid darken($primary-color, 10%);
+}

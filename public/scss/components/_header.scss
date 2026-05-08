@@ -1,0 +1,20 @@
+@use '../variables' as *;
+
+header {
+    padding: 1.5rem 1.5rem 0.75rem;
+    background-color: $primary-color;
+    border-bottom: 1px solid darken($primary-color, 10%);
+
+    h1 {
+        text-align: center;
+        font-size: clamp(2rem, 3vw + 1rem, 3rem);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $text-color;
+        text-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+    }
+
+    a {
+        text-decoration: none;
+    }
+}

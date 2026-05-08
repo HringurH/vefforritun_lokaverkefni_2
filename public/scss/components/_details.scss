@@ -1,0 +1,67 @@
+@use "../variables" as *;
+
+.details {
+    padding: 16px;
+    margin: 16px auto;
+    max-width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "image image"
+        "info ingredients"
+        "steps steps"
+        "add-ingredient add-step";
+
+    .recipe-info {
+        grid-area: info;
+    }
+
+    .ingredients-list {
+        grid-area: ingredients;
+    }
+
+    .steps-list {
+        grid-area: steps;
+        
+        img {
+            max-width: 30%;
+        }
+    }
+
+    .recipe-img {
+        grid-area: image;
+        border-bottom: 3px solid $accent-color;
+        margin: 10px;
+        padding: 5px;
+        max-width: 80%;
+    }
+
+    .add-ingredient {
+        grid-area: add-ingredient;
+    }
+
+    .add-step {
+        grid-area: add-step;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        color: $text-color;
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-size: 1em;
+        color: darken($text-color, 20%);
+    }
+
+    a {
+        color: $accent-color;
+        text-decoration: none;
+
+        &:hover {
+            color: darken($accent-color, 15%);
+            text-decoration: underline;
+        }
+    }
+}
