@@ -45,17 +45,9 @@ const getRecipeForm = (req, res) => {
 
 const createRecipe = async (req, res) => {
     try {
-        const { name, description, time_minutes, work_level, image_path, ingredients, steps } = req.body;
+        const { name, description, time_minutes, work_level, image_path} = req.body;
         const recipe = await recipeService.createRecipe(name, description, time_minutes, work_level, image_path);
         const recipeId = recipe.id;
-
-        for (const ingredient of ingredients) {
-            await recipeService.createRecipeIngredient(recipeId, ingredient.id, ingredient.quantity);
-        }
-
-        for (const step of steps) {
-            await recipeService.createRecipeStep(recipeId, step.step_number, step.instruction);
-        }
 
         res.redirect(`/recipes/${recipeId}`);
     } catch (error) {

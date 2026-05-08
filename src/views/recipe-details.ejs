@@ -12,18 +12,26 @@
             </div>
             <div class="ingredients-list">
                 <h3>Ingredients:</h3>
-                <% ingredients.forEach(ingredient => { %>
-                    <input type="checkbox" id="<%= ingredient.name %>">
-                    <label for="<%= ingredient.name %>"><%= ingredient.name %> (<%= ingredient.quantity %>)</label><br>
-                <% }); %>
+                <% if (ingredients != null) {%>
+                    <% ingredients.forEach(ingredient => { %>
+                        <input type="checkbox" id="<%= ingredient.name %>">
+                        <label for="<%= ingredient.name %>"><%= ingredient.name %> (<%= ingredient.quantity %>)</label><br>
+                    <% }); %>
+                <% } else { %>
+                    <p>No ingredients added.</p>
+                <% } %>
             </div>
             <div class="steps-list">
                 <h3>Steps:</h3>
-                <% steps.forEach(step => { %>
-                    <p><%= step.step_number %>. <%= step.name %></p>
-                    <p><%= step.description %></p>
-                    <img src="../<%= step.image_path %>" alt="<%= step.name %>">
-                <% }); %>
+                <% if (steps != null) { %>
+                    <% steps.forEach(step => { %>
+                        <p><%= step.step_number %>. <%= step.name %></p>
+                        <p><%= step.description %></p>
+                        <img src="../<%= step.image_path %>" alt="<%= step.name %>">
+                    <% }); %>
+                <% } else { %>
+                    <p>No steps added.</p>
+                <% } %>
             </div>
         </article>
     </main>

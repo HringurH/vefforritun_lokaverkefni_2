@@ -2,20 +2,26 @@
 
     <main>
         <h2>Add New Recipe</h2>
-        <form action="/uppskriftir/ny" method="POST">
+        <form action="/recipe/new" method="POST">
             <label for="name">Recipe Name:</label>
             <input type="text" id="name" name="name" required>
 
             <label for="description">Description:</label>
             <textarea id="description" name="description" required></textarea>
 
-            <label for="work_level">Work Level:</label>
-            <select id="work_level" name="work_level" required>
-                <option value="">Select work level</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
+            <p>Work Level:</p>
+            <div class="work-level-options">
+                <input type="radio" id="work_level_1" name="work_level" value="1" required>
+                <label for="work_level_1">1</label>
+                <input type="radio" id="work_level_2" name="work_level" value="2" required>
+                <label for="work_level_2">2</label>
+                <input type="radio" id="work_level_3" name="work_level" value="3" required>
+                <label for="work_level_3">3</label>
+                <input type="radio" id="work_level_4" name="work_level" value="4" required>
+                <label for="work_level_4">4</label>
+                <input type="radio" id="work_level_5" name="work_level" value="5" required>
+                <label for="work_level_5">5</label>
+            </div>
 
             <label for="time_minutes">Time (minutes):</label>
             <input type="number" id="time_minutes" name="time_minutes" required>
